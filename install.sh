@@ -11,7 +11,7 @@ else
 fi
 
 for pkg in $packageList; do
-	dpkg -l | grep -qw $pkg || apt install -y $pkg
+	dpkg -l | grep -qw $pkg || apt update && apt install -y $pkg
 done
 
 pip3 install -r requirements.txt
