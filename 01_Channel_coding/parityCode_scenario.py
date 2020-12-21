@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from repetitionCode import RepetitionCode
+from parityCode import ParityCode
 from channel import Channel
 import numpy as npy, random, time
 
@@ -35,9 +35,9 @@ def scenario(n=3, prob=0.02, frame_len = 10000):
     # Scenario behaviour
     print("Simulating Repetition code scenario...\n")
     bitsTx  = randBits(frame_len)
-    code_Tx = RepetitionCode.repetitionEncoder(bitsTx, n)
+    code_Tx = ParityCode.parityEncoder(bitsTx, n)
     code_Rx = Channel(prob).run(code_Tx)
-    bitsRx  = RepetitionCode.repetitionDecoder(code_Rx, n)
+    bitsRx,err_detected  = ParityCode.parityDecoder(code_Rx, n)
 
     # Print results
     print('------------------------------------')
@@ -48,8 +48,10 @@ def scenario(n=3, prob=0.02, frame_len = 10000):
     print('\n------------ Results ---------------')
     print('[+] Total bits: '+str(frame_len))
     print('[+] Good: '+str(getGood(bitsTx,bitsRx)))
-    print('[+] Errors: '+str(code_Tx.size - getGood(code_Tx,code_Rx)))
-    print('[+] Fixed: '+str(code_Rx.size - getGood(code_Rx,npy.repeat(npy.array(bitsRx), n))))
+    print('[+] Errors (Total): '+str(code_Tx.size - getGood(code_Tx,code_Rx)))
+    print('[+] Errors (Data): '+str(frame_len - getGood(bitsTx,bitsRx)))
+    print('[+] Errors (Parity bits): '+str( (code_Tx.size - getGood(code_Tx,code_Rx)) - (frame_len - getGood(bitsTx,bitsRx))))
+    print('[+] Errors detected: ' + str(err_detected))
     print('[+] Error probability (calculated): '+str((code_Tx.size - getGood(code_Tx,code_Rx))/code_Tx.size))
 
 
