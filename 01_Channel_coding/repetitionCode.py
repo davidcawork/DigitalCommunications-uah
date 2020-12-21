@@ -17,7 +17,7 @@ class RepetitionCode(object):
 
         decoded_code = []
 
-        for word in npy.split(npy.array(code),n):
+        for word in npy.split(npy.array(code),npy.array(code).size/n):
 
             # First, we will check if all elements of the given word are equal.
             # If there is one element different in word, we could say that an error has occurred.
