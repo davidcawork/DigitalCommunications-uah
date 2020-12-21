@@ -12,6 +12,7 @@ class ParityCode(object):
     def parityEncoder(bits, n):
         encoded_code = []
 
+        # If there is a even number of ones in (n-1) tuple, parity bit -> 0
         for word in npy.split(npy.array(bits), npy.array(bits).size/(n-1)):
             parity_bit = 0 if npy.count_nonzero(word == 1) % 2 == 0 else 1
             encoded_code.append(npy.append(word, parity_bit))
@@ -26,6 +27,7 @@ class ParityCode(object):
 
         for word in npy.split(npy.array(code),npy.array(code).size/n):
 
+            # Check parity bit
             parity_bit = 0 if npy.count_nonzero(word[0:2] == 1) % 2 == 0 else 1
             if not parity_bit == word[2]:
                 err_detected +=1
