@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
+from scipy import stats
 import numpy as npy
+
 
 class RepetitionCode(object):
 
@@ -10,3 +12,26 @@ class RepetitionCode(object):
     def repetitionEncoder(bits, n):
         return npy.repeat(npy.array(bits), n)
 
+    @staticmethod
+    def repetitionDecoder(code, n):
+
+        decoded_code = []
+
+        for word in npy.split(npy.array(code),n):
+
+            # First, we will check if all elements of the given word are equal.
+            # 
+            # If there is one element different in word, we could say that an error has occurred.
+            if not npy.all(word == word[0]):
+
+                # By calculating the mode, we get the element that appears most often in the given word, and then, we are able to "fix" the error :)
+                print(str(stats.mode(word)[0][0]))
+                word.fill(stats.mode(word)[0][0])
+            
+            decoded_code.append(word)
+        
+        return npy.concatenate(decoded_code)
+
+
+
+                
