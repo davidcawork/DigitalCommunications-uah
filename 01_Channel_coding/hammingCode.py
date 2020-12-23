@@ -65,8 +65,10 @@ class HammingCode(object):
         if not code.size % self.k == 0:
             code = self.zeroPadding(code, self.k - (code.size % self.k))
 
-        for word in npy.split(npy.array(bits), npy.array(bits).size / self.k):
+        for word in npy.split(code, code.size / self.k):
+            encoded_code.append(npy.dot(word, self.G))
             pass
+
         return npy.hstack(encoded_code)
 
     def hammingDecoder(self, code):
