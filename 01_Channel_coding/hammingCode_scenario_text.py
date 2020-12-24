@@ -36,7 +36,7 @@ def scenario(q=3, prob=0.02):
     # Scenario behaviour
     print("Simulating Hamming code scenario...\n")
     HammingBlock = HammingCode(q=3)
-    bitsTx = prepareBitStreamFromFile('data.txt')
+    bitsTx = prepareBitStreamFromFile('data/data.txt')
     code_Tx = HammingBlock.hammingEncoder(bitsTx)
     code_Rx = Channel(prob).run(code_Tx)
     bitsRx, fixed = HammingBlock.hammingDecoder(code_Rx)
@@ -56,7 +56,7 @@ def scenario(q=3, prob=0.02):
           str((code_Tx.size - getGood(code_Tx, code_Rx)) / code_Tx.size))
 
     # Save Received  file
-    saveIntoFile(bitsRx, 'data_out.txt')
+    saveIntoFile(bitsRx, 'data/data_out.txt')
 
 
 if __name__ == '__main__':
