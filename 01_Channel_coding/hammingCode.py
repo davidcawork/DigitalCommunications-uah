@@ -41,12 +41,15 @@ class HammingCode(object):
 
         # Just to correct order
         H_Pt = H_Pt.T
+        Iq = npy.identity(q, dtype=int)
 
-        H = npy.hstack((H_Pt, npy.identity(q, dtype=int)))
+        H = npy.hstack((H_Pt, Iq))
 
         # Once we have parity check matrix, we can calculate generator matrix (G)
         P = H_Pt.T
-        G = npy.concatenate((npy.identity(k, dtype=int), P), axis=1)
+        Ik = npy.identity(k, dtype=int)
+
+        G = npy.concatenate((Ik, P), axis=1)
 
         return [H, G]
 
@@ -62,12 +65,13 @@ class HammingCode(object):
         encoded_code = []
         code = npy.array(bits)
 
+        # If the given bits are not multiples of K param, we'ill have to add zeros at the end to archive it (called zeropadding procedure)
         if not code.size % self.k == 0:
             code = self.zeroPadding(code, self.k - (code.size % self.k))
 
+        # We've to use module operator due to we are working with integers, but we want binary result :)
         for word in npy.split(code, code.size / self.k):
-            encoded_code.append(npy.dot(word, self.G))
-            pass
+            encoded_code.append(npy.dot(word, self.G) % 2)
 
         return npy.hstack(encoded_code)
 
