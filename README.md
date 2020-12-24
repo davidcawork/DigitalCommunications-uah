@@ -1,6 +1,12 @@
 # DigitalCommunications-uah
 UAH Telecommunication Engineering Master's Digital Communications Subject
 
+## Dependences
+
+- numpy==1.19.4
+- scipy==1.5.4
+- simpleaudio==1.0.4
+
 
 ## Tested systems (Fresh install)
 - Ubuntu 20.10 (Linux testdeploy 5.4.0-1030-gcp  x86_64 GNU/Linux) :heavy_check_mark:
