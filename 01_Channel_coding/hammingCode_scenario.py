@@ -8,13 +8,13 @@ import time
 
 
 def scenario(q=3, prob=0.02, frame_len=10000):
-    "Main method to simulate a noisy scenario using Repetition codes"
+    "Main method to simulate a noisy scenario using Hamming codes"
 
     # Stats vars
     start_time = time.time()
 
     # Scenario behaviour
-    print("Simulating Repetition code scenario...\n")
+    print("Simulating Hamming code scenario...\n")
     HammingBlock = HammingCode(q=3)
     bitsTx = randBits(frame_len)
     code_Tx = HammingBlock.hammingEncoder(bitsTx)
