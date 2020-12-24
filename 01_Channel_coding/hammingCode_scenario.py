@@ -7,7 +7,7 @@ import random
 import time
 
 
-def scenario(n=3, prob=0.02, frame_len=10000):
+def scenario(q=3, prob=0.02, frame_len=10000):
     "Main method to simulate a noisy scenario using Repetition codes"
 
     # Stats vars
@@ -37,4 +37,4 @@ def scenario(n=3, prob=0.02, frame_len=10000):
 
 
 if __name__ == '__main__':
-    scenario(n=3, prob=0.02, frame_len=10000)
+    scenario(q=3, prob=0.02, frame_len=10000)
