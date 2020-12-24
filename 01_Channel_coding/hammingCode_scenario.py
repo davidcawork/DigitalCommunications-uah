@@ -25,7 +25,7 @@ def scenario(q=3, prob=0.02, frame_len=10000):
     print('------------------------------------')
     print('Time elapsed: '+str((time.time() - start_time)*1000) + ' ms')
     print('Frame length: '+str(frame_len))
-    print('Repetition factor: '+str(n))
+    print('Repetition factor: '+str(q))
     print('Error probability: '+str(prob))
     print('\n------------ Results ---------------')
     print('[+] Total bits: '+str(frame_len))

@@ -63,7 +63,7 @@ class HammingCode(object):
 
     def hammingEncoder(self, bits):
         encoded_code = []
-        code = npy.array(bits)
+        code = npy.array(bits, dtype=int)
 
         # If the given bits are not multiples of K param, we'ill have to add zeros at the end to archive it (called zeropadding procedure)
         if not code.size % self.k == 0:
