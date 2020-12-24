@@ -18,8 +18,8 @@ def scenario(n=3, prob=0.02, frame_len=10000):
     HammingBlock = HammingCode(q=3)
     bitsTx = randBits(frame_len)
     code_Tx = HammingBlock.hammingEncoder(bitsTx)
-    # code_Rx = Channel(prob).run(code_Tx)
-    # bitsRx  = HammingBlock.hammingDecoder(code_Rx)
+    code_Rx = Channel(prob).run(code_Tx)
+    bitsRx, fixed = HammingBlock.hammingDecoder(code_Rx)
 
     # Print results
     print('------------------------------------')
@@ -28,12 +28,13 @@ def scenario(n=3, prob=0.02, frame_len=10000):
     print('Repetition factor: '+str(n))
     print('Error probability: '+str(prob))
     print('\n------------ Results ---------------')
-    # print('[+] Total bits: '+str(frame_len))
-    # print('[+] Good: '+str(getGood(bitsTx,bitsRx)))
-    # print('[+] Errors: '+str(code_Tx.size - getGood(code_Tx,code_Rx)))
-    # print('[+] Fixed: '+str(code_Rx.size - getGood(code_Rx,npy.repeat(npy.array(bitsRx), n))))
-    # print('[+] Error probability (calculated): '+str((code_Tx.size - getGood(code_Tx,code_Rx))/code_Tx.size))
+    print('[+] Total bits: '+str(frame_len))
+    print('[+] Good: '+str(getGood(bitsTx, bitsRx)))
+    print('[+] Errors: '+str(code_Tx.size - getGood(code_Tx, code_Rx)))
+    print('[+] Fixed: '+str(fixed))
+    print('[+] Error probability (calculated): ' +
+          str((code_Tx.size - getGood(code_Tx, code_Rx))/code_Tx.size))
 
 
 if __name__ == '__main__':
-    scenario(n=3, prob=0.02, frame_len=10)
+    scenario(n=3, prob=0.02, frame_len=10000)

@@ -76,4 +76,30 @@ class HammingCode(object):
         return npy.hstack(encoded_code)
 
     def hammingDecoder(self, code):
-        pass
+
+        decoded_code = list()
+        fixed = 0
+
+        for word in npy.split(npy.array(code), npy.array(code).size / self.n):
+
+            syndrome = npy.dot(word, self.H.T) % 2
+
+            if not npy.count_nonzero(syndrome) == 0:
+
+                # Ref: The Art of Doing Science and Engineering: Learning to Learn (Chap 12 - Error correcting codes)
+                #
+                # We can create a table of errors associated to syndromes, following the ML criteria,
+                # but what we would really be doing is generating vectors of the same length as
+                # the received word with a single bit to one in the position from where the error has occurred.
+                #
+                # It is easier to see the position (columns) occupied by the value of the syndrome within the
+                # parity checking matrix
+                position = npy.where(
+                    npy.all(self.H == syndrome[:, None], axis=0))[0]
+
+                word[position] = 0 if word[position] == 1 else 1
+                fixed += 1
+
+            decoded_code.append(word[:self.k])
+
+        return [npy.hstack(decoded_code), fixed]
