@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 
-from hammingCode import HammingCode
+from HammingEncoding.hammingCode import HammingCode
 from channel import Channel, randBits, getGood
 import numpy as npy
 import random
