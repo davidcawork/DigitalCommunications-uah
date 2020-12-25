@@ -10,6 +10,11 @@ class HammingCode(object):
     """Class to manage Hamming Codes"""
 
     def __init__(self, q=3):
+        """
+        :param q: int (number of redundant digits)
+        :param k: int (number of useful digits)
+        :param n: int (number of total of digits)
+        """
         self.q = q
         self.n = 2**(q) - 1
         self.k = self.n - q
@@ -19,6 +24,7 @@ class HammingCode(object):
     @staticmethod
     def generateMatrix(q):
         """
+        Function to generate H and G matrix
 
             - Def:  H = [ Pt | Iq ] ( q x n )
             - Def:  G = [ Ik |  P ] ( k x n )
@@ -55,13 +61,26 @@ class HammingCode(object):
 
     @staticmethod
     def isPower2(number):
+        """
+        :returns: bool  ( True if number is power of two)
+        """
         return (number & (number - 1) == 0) and number != 0
 
     @staticmethod
     def zeroPadding(vector, size):
+        """
+        :returns: numpy.array (Array with zero padding)
+        """
         return npy.pad(vector, pad_width=(0, size), mode='constant')
 
     def hammingEncoder(self, bits):
+        """
+        Function to encode data
+
+        :param bits: list (bits to encode) 
+        :returns: numpy.array (Encoded code)
+        """
+
         encoded_code = []
         code = npy.array(bits, dtype=int)
 
@@ -76,7 +95,12 @@ class HammingCode(object):
         return npy.hstack(encoded_code)
 
     def hammingDecoder(self, code):
+        """
+        Function to decode encoded data
 
+        :param code: numpy.array (bits encoded)
+        :returns: [ numpy.array (bits decoded), int (fixed bits)]
+        """
         decoded_code = list()
         fixed = 0
 
