@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-import random, numpy as npy
+import random
+import numpy as npy
 
 
 class Channel(object):
@@ -26,17 +27,20 @@ def randBits(size):
     "Method to create a random binary frame"
 
     frame = npy.zeros(size, dtype=npy.int32)
-    frame[:random.randint(0,size)]  = 1
+    frame[:random.randint(0, size)] = 1
     npy.random.shuffle(frame)
-    
+
     return frame
+
 
 def getGood(secuence_src, secuence_dst):
     "Method to count how much bits of a secuence are equal"
     total_good = 0
 
-    for i in range(0, secuence_src.size):
-        if secuence_src[i] == secuence_dst[i]:
-            total_good +=1
-
+    try:
+        for i in range(0, secuence_src.size):
+            if secuence_src[i] == secuence_dst[i]:
+                total_good += 1
+    except:
+        total_good = 0
     return total_good
