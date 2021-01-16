@@ -6,6 +6,7 @@ UAH Telecommunication Engineering Master's Digital Communications Subject
 - numpy==1.19.4
 - scipy==1.5.4
 - simpleaudio==1.0.4
+- Pympler==0.9
 
 
 ## Tested systems (Fresh install)
