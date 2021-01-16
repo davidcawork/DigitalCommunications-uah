@@ -32,7 +32,6 @@ def scenario(prob=0.02, frame_len=20):
     print('[+] Total bits: '+str(frame_len))
     print('[+] Good: '+str(getGood(bitsTx, bitsRx)))
     print('[+] Errors (Total): '+str(code_Tx.size - getGood(code_Tx, code_Rx)))
-    print('[+] Errors (Data): '+str(frame_len - getGood(bitsTx, bitsRx)))
     print('[+] Error probability (calculated): '+str((code_Tx.size - getGood(code_Tx, code_Rx))/code_Tx.size))
 
 
